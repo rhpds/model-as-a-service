@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhcl-operator
+  namespace: openshift-operators
+spec:
+  channel: {{ .Values.redhatConnectivityLink.operator.channel }}
+  installPlanApproval: {{ .Values.redhatConnectivityLink.operator.installPlanApproval }}
+  name: rhcl-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: {{ .Values.redhatConnectivityLink.operator.startingCSV }}

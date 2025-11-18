@@ -1,0 +1,29 @@
+apiVersion: kuadrant.io/v1
+kind: AuthPolicy
+metadata:
+  name: maas-api-auth-policy
+  namespace: openshift-ingress
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  rules:
+    authentication:
+      api-key-auth:
+        apiKey:
+          allNamespaces: true
+          selector:
+            matchLabels:
+              authorino.kuadrant.io/managed-by: authorino
+        credentials:
+          customHeader:
+            name: API-KEY
+        defaults:
+          userid:
+            expression: |
+              auth.identity.metadata.annotations["user.authorino.kuadrant.io/userid"]
+        metrics: false
+        priority: 0
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: maas-default-gateway
