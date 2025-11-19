@@ -6,6 +6,7 @@ metadata:
   namespace: openshift-ingress
   annotations:
     opendatahub.io/managed: "false"
+    argocd.argoproj.io/sync-wave: "1"
   labels:
     app.kubernetes.io/name: maas
     app.kubernetes.io/instance: maas-default-gateway
