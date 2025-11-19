@@ -1,4 +1,5 @@
-operator:
-  channel: stable
-  installPlanApproval: Automatic
-  startingCSV: rhcl-operator.v1.2.0
+redhatConnectivityLink:
+  operator:
+    channel: stable
+    installPlanApproval: Automatic
+    startingCSV: rhcl-operator.v1.2.0
