@@ -35,7 +35,7 @@ spec:
           - name: VLLM_ATTENTION_BACKEND
             value: XFORMERS
           - name: VLLM_USE_V1
-            value: "0"
+            value: "1"
         resources:
           limits:
             cpu: '2'
