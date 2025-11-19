@@ -1,4 +1,4 @@
-{{- $existingSecret := lookup "v1" "Secret" .Release.Namespace "api-key-test-user" }}
+{{- $existingSecret := lookup "v1" "Secret" "maas-api-keys" "api-key-test-user" }}
 apiVersion: v1
 kind: Secret
 metadata:
