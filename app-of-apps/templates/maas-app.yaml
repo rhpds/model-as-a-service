@@ -15,7 +15,7 @@ spec:
           value: {{ .Values.maasApi.clusterDomain }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: openshift-operators
+    namespace: maas-api
   ignoreDifferences:
     - group: '*'
       jqPathExpressions:
