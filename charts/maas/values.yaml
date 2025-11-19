@@ -4,3 +4,7 @@ commonLabels:
   app.kubernetes.io/name: maas-api
 
 clusterDomain: apps.cluster-7d86.7d86.sandbox246.opentlc.com
+
+image:
+  repository: quay.io/opendatahub/maas-api
+  tag: latest
