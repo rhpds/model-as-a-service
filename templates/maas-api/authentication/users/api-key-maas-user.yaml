@@ -11,7 +11,10 @@ metadata:
   annotations:
     user.authorino.kuadrant.io/userid: "maas-user"
     user.authorino.kuadrant.io/groups: "tier-free-users"
-    argocd.argoproj.io/sync-options: "Prune=false"
+    argocd.argoproj.io/sync-options: "Prune=false,Delete=false"
+    argocd.argoproj.io/compare-options: "IgnoreExtraneous"
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 type: Opaque
 stringData:
   api_key: "{{ randAlphaNum 20 }}"
