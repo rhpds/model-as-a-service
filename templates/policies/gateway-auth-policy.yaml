@@ -7,6 +7,19 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   rules:
+    metadata:
+      matchedTier:
+        http:
+          url: http://maas-api.maas-api.svc.cluster.local:8080/v1/tiers/lookup
+          contentType: application/json
+          method: POST
+          body:
+            expression: |-
+              { "groups": auth.identity.groups }
+        cache:
+          key:
+            selector: auth.identity.userid
+          ttl: 300
     authentication:
       api-key-auth:
         apiKey:
@@ -21,8 +34,43 @@ spec:
           userid:
             expression: |
               auth.identity.metadata.annotations["user.authorino.kuadrant.io/userid"]
+          groups:
+            expression: |
+              auth.identity.metadata.annotations["user.authorino.kuadrant.io/groups"].split(",")
         metrics: false
         priority: 0
+    authorization:
+      tier-access:
+        kubernetesSubjectAccessReview:
+          user:
+            expression: auth.identity.userid
+          authorizationGroups:
+            expression: auth.identity.groups
+          resourceAttributes:
+            group:
+              value: serving.kserve.io
+            resource:
+              value: llminferenceservices
+            namespace:
+              expression: |
+                request.path.split("/")[1]
+            name:
+              expression: |
+                request.path.split("/")[2]
+            verb:
+              value: post
+    response:
+      success:
+        filters:
+          identity:
+            json:
+              properties:
+                userid:
+                  expression: auth.identity.userid
+                tier:
+                  expression: auth.metadata.matchedTier["tier"]
+                groups:
+                  expression: auth.identity.groups
   targetRef:
     group: gateway.networking.k8s.io
     kind: Gateway
