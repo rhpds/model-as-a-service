@@ -1,6 +1,6 @@
 apiVersion: v2
-name: redhat-connectivity-link
-description: A Helm chart to deploy Red Hat Connectivity Link
+name: model-as-a-service
+description: A Helm chart to deploy Model as a Service
 type: application
 
 version: 0.0.1
