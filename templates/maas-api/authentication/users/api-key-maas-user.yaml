@@ -1,4 +1,6 @@
 {{- $existingSecret := lookup "v1" "Secret" "maas-api-keys" "api-key-maas-user" }}
+{{- if not $existingSecret }}
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -9,14 +11,7 @@ metadata:
   annotations:
     user.authorino.kuadrant.io/userid: "maas-user"
     user.authorino.kuadrant.io/groups: "tier-free-users"
-    sync.argoproj.io/sync-wave: "1"
 type: Opaque
-{{- if $existingSecret }}
-data:
-  # Use existing secret data
-  api_key: {{ index $existingSecret.data "api_key" }}
-{{- else }}
 stringData:
-  # Generate new secret only if it doesn't exist
   api_key: "{{ randAlphaNum 20 }}"
 {{- end }}
