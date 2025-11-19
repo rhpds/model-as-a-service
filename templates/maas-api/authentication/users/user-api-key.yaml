@@ -1,0 +1,15 @@
+{{- range .Values.apiUsers }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: api-key-{{ .username }}
+  namespace: maas-api-keys
+  labels:
+    authorino.kuadrant.io/managed-by: authorino
+  annotations:
+    user.authorino.kuadrant.io/userid: {{ .username }}
+    user.authorino.kuadrant.io/groups: {{ .tier }}
+stringData:
+  api_key: "{{ .apiKey }}"
+{{- end }}

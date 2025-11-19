@@ -9,9 +9,10 @@ image:
   repository: quay.io/opendatahub/maas-api
   tag: latest
 
-maasUser:
-  username: maas-user
+apiUsers:
+- username: maas-user
   apiKey: notsecureenough
+  tier: tier-free-users
 
 llmInferenceServices:
 - apiVersion: serving.kserve.io/v1alpha1
