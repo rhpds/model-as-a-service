@@ -1,3 +1,4 @@
+{{- $existingSecret := lookup "v1" "Secret" .Release.Namespace "api-key-test-user" }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -10,5 +11,12 @@ metadata:
     user.authorino.kuadrant.io/groups: "tier-premium-users"
     sync.argoproj.io/sync-wave: "1"
 type: Opaque
+{{- if $existingSecret }}
+data:
+  # Use existing secret data
+  api_key: {{ index $existingSecret.data "api_key" }}
+{{- else }}
 stringData:
-  api_key: {{ randAlphaNum 20 | quote }}
+  # Generate new secret only if it doesn't exist
+  api_key: "{{ randAlphaNum 20 }}"
+{{- end }}
