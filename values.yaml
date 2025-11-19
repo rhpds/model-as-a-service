@@ -10,7 +10,7 @@ image:
   tag: latest
 
 apiUsers:
-- username: maas-user
+- username: api-user-1
   apiKey: notsecureenough
   tier: tier-free-users
 
