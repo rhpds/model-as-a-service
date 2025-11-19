@@ -1,4 +1,4 @@
-{{- $existingSecret := lookup "v1" "Secret" "maas-api-keys" "api-key-test-user" }}
+{{- $existingSecret := lookup "v1" "Secret" "maas-api-keys" "api-key-maas-user" }}
 apiVersion: v1
 kind: Secret
 metadata:
