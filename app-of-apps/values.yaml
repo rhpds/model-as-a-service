@@ -1,7 +1,7 @@
 repoURL: https://github.com/treddy08/model-as-a-service.git
 targetRevision: main
 
-maasApi:
+maas-api:
   clusterDomain: apps.cluster-7d86.7d86.sandbox246.opentlc.com
 
 redhat-connectivity-link:
