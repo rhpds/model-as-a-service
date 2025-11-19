@@ -1,5 +1,5 @@
 apiVersion: v2
-name: redhat-connectivity-link
+name: model-as-a-service
 description: A Helm chart to deploy Model as a Service
 type: application
 
