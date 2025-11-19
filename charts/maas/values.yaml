@@ -1,0 +1,6 @@
+commonLabels:
+  app.kubernetes.io/part-of: model-as-a-service
+  app.kubernetes.io/component: api
+  app.kubernetes.io/name: maas-api
+
+clusterDomain: apps.cluster-7d86.7d86.sandbox246.opentlc.com

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: redhat-connectivity-link
+description: A Helm chart to deploy Red Hat Connectivity Link
+type: application
+
+version: 0.0.1
+appVersion: 0.0.1

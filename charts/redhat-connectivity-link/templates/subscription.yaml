@@ -4,9 +4,9 @@ metadata:
   name: rhcl-operator
   namespace: openshift-operators
 spec:
-  channel: {{ .Values.redhatConnectivityLink.operator.channel }}
-  installPlanApproval: {{ .Values.redhatConnectivityLink.operator.installPlanApproval }}
+  channel: {{ .Values.operator.channel }}
+  installPlanApproval: {{ .Values.operator.installPlanApproval }}
   name: rhcl-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: {{ .Values.redhatConnectivityLink.operator.startingCSV }}
+  startingCSV: {{ .Values.operator.startingCSV }}

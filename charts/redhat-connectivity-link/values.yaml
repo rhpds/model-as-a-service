@@ -1,0 +1,4 @@
+operator:
+  channel: stable
+  installPlanApproval: Automatic
+  startingCSV: rhcl-operator.v1.2.0

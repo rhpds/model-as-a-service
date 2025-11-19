@@ -11,12 +11,12 @@ spec:
     path: ./charts/redhat-connectivity-link
     helm:
       parameters:
-        - name: redhatConnectivityLink.operator.channel
-          value: {{ .Values.redhatConnectivityLink.operator.channel }}
-        - name: redhatConnectivityLink.operator.installPlanApproval
-          value: {{ .Values.redhatConnectivityLink.operator.installPlanApproval }}
-        - name: redhatConnectivityLink.operator.startingCSV
-          value: {{ .Values.redhatConnectivityLink.operator.startingCSV }}
+        - name: operator.channel
+          value: {{ .Values.operator.channel }}
+        - name: operator.installPlanApproval
+          value: {{ .Values.operator.installPlanApproval }}
+        - name: operator.startingCSV
+          value: {{ .Values.operator.startingCSV }}
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-operators
