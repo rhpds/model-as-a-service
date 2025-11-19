@@ -11,6 +11,7 @@ metadata:
   annotations:
     user.authorino.kuadrant.io/userid: "maas-user"
     user.authorino.kuadrant.io/groups: "tier-free-users"
+    argocd.argoproj.io/sync-options: "Prune=false"
 type: Opaque
 stringData:
   api_key: "{{ randAlphaNum 20 }}"
