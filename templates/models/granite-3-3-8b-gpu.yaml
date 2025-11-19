@@ -11,7 +11,7 @@ metadata:
 spec:
   model:
     name: granite-3-3-8b
-    uri: 'oci://quay.io/redhat-ai-services/modelcar-catalog:granite-3.3-2b-instruct'
+    uri: 'oci://registry.redhat.io/rhelai1/modelcar-granite-8b-code-base:1.4'
   replicas: 1
   router:
     route: { }
@@ -29,23 +29,13 @@ spec:
         key: nvidia.com/gpu
         operator: Exists
     containers:
-      - image: 'registry.redhat.io/rhoai/odh-vllm-cpu-rhel9@sha256:bae57975dfe153afc799e868e6a27ec1e502f68d4337a74dc6455a6bc326d02c'
-        livenessProbe:
-          failureThreshold: 5
-          httpGet:
-            path: /health
-            port: 8000
-            scheme: HTTPS
-          initialDelaySeconds: 120
-          periodSeconds: 30
-          timeoutSeconds: 30
-        name: main
-        resources:
-          limits:
-            cpu: '2'
-            memory: 12Gi
-            nvidia.com/gpu: '1'
-          requests:
-            cpu: '500m'
-            memory: 8Gi
-            nvidia.com/gpu: '1'
+    - name: main
+      resources:
+        limits:
+          cpu: '4'
+          memory: 32Gi
+          nvidia.com/gpu: '1'
+        requests:
+          cpu: '1'
+          memory: 8Gi
+          nvidia.com/gpu: '1'
