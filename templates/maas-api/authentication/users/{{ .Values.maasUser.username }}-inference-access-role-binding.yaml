@@ -5,7 +5,7 @@ metadata:
   namespace: llm
 subjects:
   - kind: User
-    name: {{ .Values.maasUser.username }}n
+    name: {{ .Values.maasUser.username }}
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
