@@ -2,16 +2,16 @@ apiVersion: serving.kserve.io/v1alpha1
 kind: LLMInferenceService
 metadata:
   annotations:
-    openshift.io/display-name: granite-3-3-8b
+    openshift.io/display-name: granite-8b-code-instruct
     alpha.maas.opendatahub.io/tiers: '[]'
     argocd.argoproj.io/sync-wave: "2"
-  name: granite-3-3-8b
+  name: granite-8b-code-instruct
   labels:
     opendatahub.io/dashboard: 'true'
 spec:
   model:
-    name: granite-3-3-8b
-    uri: 'oci://registry.redhat.io/rhelai1/modelcar-granite-8b-code-base:1.4'
+    name: granite-8b-code-instruct
+    uri: 'oci://registry.redhat.io/rhelai1/modelcar-granite-8b-code-instruct:1.4'
   replicas: 1
   router:
     route: { }
