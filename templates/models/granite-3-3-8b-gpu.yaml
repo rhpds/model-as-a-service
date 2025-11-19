@@ -2,7 +2,7 @@ apiVersion: serving.kserve.io/v1alpha1
 kind: LLMInferenceService
 metadata:
   name: granite-8b-code-instruct
-  namepace: llm
+  namespace: llm
   annotations:
     openshift.io/display-name: granite-8b-code-instruct
     alpha.maas.opendatahub.io/tiers: '[]'
