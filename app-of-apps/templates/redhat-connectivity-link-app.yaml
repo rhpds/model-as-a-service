@@ -12,11 +12,11 @@ spec:
     helm:
       parameters:
         - name: operator.channel
-          value: {{ .Values.operator.channel }}
+          value: {{ .Values.redhatConnectivityLink.operator.channel }}
         - name: operator.installPlanApproval
-          value: {{ .Values.operator.installPlanApproval }}
+          value: {{ .Values.redhatConnectivityLink.operator.installPlanApproval }}
         - name: operator.startingCSV
-          value: {{ .Values.operator.startingCSV }}
+          value: {{ .Values.redhatConnectivityLink.operator.startingCSV }}
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-operators
