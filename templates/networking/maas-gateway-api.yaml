@@ -22,6 +22,13 @@ spec:
      allowedRoutes:
        namespaces:
          from: All
+   - name: http
+     hostname: maas.{{ .Values.clusterDomain }}
+     port: 8080
+     protocol: HTTP
+     allowedRoutes:
+       namespaces:
+         from: All         
    - name: https
      hostname: maas.{{ .Values.clusterDomain }}
      port: 443
