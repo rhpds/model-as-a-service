@@ -9,6 +9,23 @@ image:
   repository: quay.io/opendatahub/maas-api
   tag: pr-300
 
+# PostgreSQL Database Configuration
+database:
+  enabled: true
+  image: registry.redhat.io/rhel9/postgresql-15
+  imageTag: latest
+  user: maas
+  password: maas-secret-password  # CHANGE THIS IN PRODUCTION!
+  name: maas_api
+  storage: 1Gi
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
 apiUsers:
 - username: api-user-1
   apiKey: notsecureenough

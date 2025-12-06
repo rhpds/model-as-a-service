@@ -40,6 +40,13 @@ spec:
               fieldPath: metadata.namespace
         - name: PROVIDER
           value: sa-tokens
+        {{- if .Values.database.enabled }}
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: maas-api-db-url
+              key: DATABASE_URL
+        {{- end }}
         resources:
           requests:
             memory: "64Mi"
