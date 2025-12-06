@@ -13,6 +13,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: gp3-csi
   resources:
     requests:
       storage: {{ .Values.database.storage }}
