@@ -34,17 +34,17 @@ spec:
           name: postgres
           protocol: TCP
         env:
-        - name: POSTGRES_USER
+        - name: POSTGRESQL_USER
           valueFrom:
             secretKeyRef:
               name: postgres-credentials
               key: POSTGRES_USER
-        - name: POSTGRES_PASSWORD
+        - name: POSTGRESQL_PASSWORD
           valueFrom:
             secretKeyRef:
               name: postgres-credentials
               key: POSTGRES_PASSWORD
-        - name: POSTGRES_DB
+        - name: POSTGRESQL_DATABASE
           valueFrom:
             secretKeyRef:
               name: postgres-credentials
