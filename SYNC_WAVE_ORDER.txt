@@ -1,0 +1,65 @@
+================================================================================
+ArgoCD Sync Wave Order for MaaS API Deployment
+================================================================================
+
+Wave -10: NAMESPACE
+├─ namespace.yaml → Creates maas-api namespace
+│
+Wave -5: DATABASE SECRETS & SERVICE ACCOUNTS
+├─ postgres-secret.yaml → PostgreSQL credentials
+├─ postgres-serviceaccount.yaml → SA for postgres pod
+│
+Wave -4: DATABASE RBAC
+├─ postgres-rolebinding.yaml → Grants anyuid SCC to postgres SA
+│
+Wave -3: DATABASE STORAGE & CONNECTION SECRETS
+├─ postgres-pvc.yaml → 1Gi PVC (stays Pending until pod scheduled)
+├─ database-url-secret.yaml → Connection URL for maas-api
+│
+Wave -2: DATABASE DEPLOYMENT & SERVICE
+├─ postgres-deployment.yaml → PostgreSQL deployment (triggers PVC binding)
+├─ postgres-service.yaml → postgres-service:5432
+│
+Wave -1: MAAS API RBAC PREREQUISITES
+├─ maas-api/rbac/serviceaccount.yaml → SA for maas-api
+├─ maas-api/rbac/clusterrole.yaml → Cluster permissions
+│
+Wave 0: MAAS API RBAC BINDING
+├─ maas-api/rbac/clusterrolebinding.yaml → Binds SA to ClusterRole
+│
+Wave 1: MAAS API APPLICATION
+├─ maas-api/deployment/deployment.yaml → MaaS API deployment
+├─ maas-api/deployment/service.yaml → MaaS API service
+
+================================================================================
+Key Points:
+================================================================================
+
+1. Namespace MUST be created first (Wave -10) or all resources fail
+2. PVC is created in Wave -3 but won't bind until Wave -2 when pod is scheduled
+3. PostgreSQL must be ready before MaaS API starts (gap between Wave -2 and 1)
+4. RBAC resources created in dependency order (SA/Role before Binding)
+5. ArgoCD should NOT wait for PVC to bind - it will bind when pod is scheduled
+
+================================================================================
+Troubleshooting:
+================================================================================
+
+If ArgoCD is stuck:
+  1. Check namespace exists: kubectl get ns maas-api
+  2. Check PVC status: kubectl get pvc -n maas-api
+  3. Check postgres pod: kubectl get pods -n maas-api
+  4. Check events: kubectl get events -n maas-api --sort-by='.lastTimestamp'
+
+If PVC stays Pending:
+  - This is NORMAL with WaitForFirstConsumer
+  - It will bind when postgres pod is scheduled (Wave -2)
+  - Don't panic - wait for postgres deployment to be created
+
+If postgres pod fails:
+  - Check secrets exist: kubectl get secrets -n maas-api
+  - Check SA exists: kubectl get sa postgres -n maas-api
+  - Check SCC binding: kubectl get rolebinding -n maas-api
+  - Check pod logs: kubectl logs -n maas-api deployment/postgres
+
+================================================================================
